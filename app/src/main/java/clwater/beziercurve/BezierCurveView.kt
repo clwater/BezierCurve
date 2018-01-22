@@ -41,21 +41,22 @@ class BezierCurveView : View {
 
     val colorSequence = listOf(
             0x7F000000,
-            0xff5500ff,
-            0xff00ff00,
-            0xff00ffff,
-            0xff0000ff,
-            0xff55ff00,
-            0xff00ffaa,
-            0xff0055ff,
-            0xffaa00ff,
-            0xffff0055,
-            0xffaaff00,
-            0xffff00aa,
-            0xff00ff55,
-            0xff00aaff,
-            0xffff00ff
-            )
+            0xff1BFFF8,
+            0xff17FF89,
+            0xff25FF2F,
+            0xffA7FF05,
+            0xffFFE61E,
+            0xffFF9B0C,
+            0xffFF089F,
+            0xffE524FF,
+            0xff842BFF,
+            0xff090BFF,
+            0xff0982FF,
+            0xffF8A1FF,
+            0xffF7FFA7,
+            0xffAAFFEC
+    )
+
 
 
 
@@ -78,11 +79,20 @@ class BezierCurveView : View {
         points.add(Point(800F , 100F))
         points.add(Point(1000F , 1100F))
         points.add(Point(100F , 1100F))
-//        points.add(Point(100F , 600F))
-//        points.add(Point(600F , 1300F))
-//        points.add(Point(100F , 100F))
-//        points.add(Point(300F , 300F))
-//        points.add(Point(800F , 100F))
+
+        points.add(Point(100F , 600F))
+        points.add(Point(600F , 1300F))
+        points.add(Point(1100F , 1100F))
+        points.add(Point(800F , 400F))
+        points.add(Point(200F , 600F))
+
+        points.add(Point(200F , 300F))
+        points.add(Point(400F , 800F))
+        points.add(Point(100F , 1100F))
+        points.add(Point(330F , 1600F))
+        points.add(Point(873F , 223F))
+
+
 
 
 
