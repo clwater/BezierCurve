@@ -10,8 +10,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        bezier.setOnClickListener {
-//            bezier.changeView()
+        start.setOnClickListener {
+            bezier.changeView()
         }
     }
 }
