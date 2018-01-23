@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener {
 
     var index = 3
-    var time = 1
+    var time = 3
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,6 +20,7 @@ class MainActivity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener {
                 bezier.points = control.points
                 bezier.visibility = View.VISIBLE
                 bezier.inRunning = true
+                bezier.viewTime = time* 1000F
                 bezier.changeView()
             }
         }
@@ -91,6 +92,9 @@ class MainActivity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener {
             updateSeek()
         }else if (seekBar?.id == R.id.seekbar_time){
             time = progress / 1000
+            if (time < 1){
+                time = 1
+            }
             max_time.text = "time: ${time}"
         }
     }
@@ -102,8 +106,6 @@ class MainActivity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener {
             bezier.inRunning = false
             bezier.visibility = View.GONE
             control.clear()
-        }else if (seekBar?.id == R.id.seekbar_time){
-            bezier.viewTime = time* 1000F
         }
     }
 
