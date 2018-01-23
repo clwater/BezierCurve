@@ -24,11 +24,16 @@ class BezierCurveView : View {
     var per = 0F
     var points : MutableList<Point> = ArrayList()
     val bezierPoints : MutableList<Point> = ArrayList()
-    var drawControl = true
+    var viewTime = 1000F
 
     val linePaint = Paint()
     val textPaint = Paint()
     val path = Path()
+    var inRunning = true
+    var isMore = false
+    var drawControl = true
+
+
 
     var level = 0
 
@@ -72,33 +77,13 @@ class BezierCurveView : View {
         initBaseTools()
 
 
-//        points.clear()
-//
-//        points.add(Point(100F , 100F))
-//        points.add(Point(300F , 300F))
-//        points.add(Point(800F , 100F))
-//        points.add(Point(1000F , 1100F))
-//        points.add(Point(100F , 1100F))
-//
-//        points.add(Point(100F , 600F))
-//        points.add(Point(600F , 1300F))
-//        points.add(Point(1100F , 1100F))
-//        points.add(Point(800F , 400F))
-//        points.add(Point(200F , 600F))
-//
-//        points.add(Point(200F , 300F))
-//        points.add(Point(400F , 800F))
-//        points.add(Point(100F , 1100F))
-//        points.add(Point(330F , 1600F))
-//        points.add(Point(1020F , 1223F))
+        if (inRunning) {
 
-
-
-
-
-        drawControl = true
-        drawBezier(canvas ,  per , points)
-        level = 0
+            if (points.size > 0) {
+                drawBezier(canvas, per, points)
+                level = 0
+            }
+        }
 
 
     }
@@ -129,9 +114,14 @@ class BezierCurveView : View {
             }
         }
 
-        linePaint.color = colorSequence[level].toInt()
-        textPaint.color = colorSequence[level].toInt()
 
+        if (isMore){
+            linePaint.color = 0x3F000000
+            textPaint.color = 0x3F000000
+        }else {
+            linePaint.color = colorSequence[level].toInt()
+            textPaint.color = colorSequence[level].toInt()
+        }
 
         path.moveTo(points[0].x , points[0].y)
 
@@ -163,9 +153,17 @@ class BezierCurveView : View {
 
         if (!(level !=0 && (per==0F || per == 1F) )) {
             if (inBase) {
-                canvas.drawText( "${charSequence[level]}0",points[0].x , points[0].y , textPaint)
+                if (isMore && level != 0){
+                    canvas.drawText("0:0", points[0].x, points[0].y, textPaint)
+                }else {
+                    canvas.drawText("${charSequence[level]}0", points[0].x, points[0].y, textPaint)
+                }
                 for (index in 1..points.size - 1){
-                    canvas.drawText( "${charSequence[level]}${index}" ,points[index].x , points[index].y , textPaint)
+                    if (isMore && level != 0){
+                        canvas.drawText( "${index}:${index}" ,points[index].x , points[index].y , textPaint)
+                    }else {
+                        canvas.drawText( "${charSequence[level]}${index}" ,points[index].x , points[index].y , textPaint)
+                    }
                 }
             }
         }
@@ -205,7 +203,7 @@ class BezierCurveView : View {
     fun changeView() {
         bezierPoints.clear()
         val va = ValueAnimator.ofFloat(0F, 1F)
-        va.duration = 5000
+        va.duration = viewTime.toLong()
         va.interpolator = LinearInterpolator()
         va.addUpdateListener { animation ->
             per = animation.animatedValue as Float

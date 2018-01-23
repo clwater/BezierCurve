@@ -10,20 +10,134 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
-        <Button
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="start"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:id="@+id/start"/>
-        <Button
-            android:layout_width="wrap_content"
+            android:orientation="horizontal">
+            <Button
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text="start"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:id="@+id/start"/>
+            <Button
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text="clear"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:id="@+id/clear"/>
+            <Button
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text="clear Bezier"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:id="@+id/clearBezier"/>
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text="Close Helper"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:id="@+id/chooseHelper"/>
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text="More Points"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:id="@+id/more"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="clear"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:id="@+id/clear"/>
+            android:orientation="horizontal"
+            android:layout_margin="5dp"
+            android:id="@+id/linear_index">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/colorAccent"
+                android:textSize="16dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/max_controrl"
+                android:text="index: 3"/>
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="min: 2"
+                android:layout_marginStart="10dp"
+                />
+            <SeekBar
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:max="15"
+                android:min="2"
+                android:id="@+id/seekbar_index"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="max: 15"
+                />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="5dp"
+            android:id="@+id/linear_time">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/colorAccent"
+                android:textSize="16dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/max_time"
+                android:text="index: 3"/>
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="min: 0"
+                android:layout_marginStart="10dp"
+                />
+            <SeekBar
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:max="10000"
+                android:min="0"
+                android:id="@+id/seekbar_time"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="max: 10"
+                />
+
+        </LinearLayout>
 
 
     </LinearLayout>
@@ -31,6 +145,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
+        android:layout_margin="5dp"
         android:layout_height="match_parent">
 
         <clwater.beziercurve.ControlView
