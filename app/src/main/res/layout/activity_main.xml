@@ -9,7 +9,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <Button
             android:layout_width="wrap_content"
@@ -17,13 +18,33 @@
             android:text="start"
             style="@style/Widget.AppCompat.Button.Colored"
             android:id="@+id/start"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="clear"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:id="@+id/clear"/>
 
 
     </LinearLayout>
 
-    <clwater.beziercurve.BezierCurveView
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/bezier"/>
+        android:layout_height="match_parent">
+
+        <clwater.beziercurve.ControlView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/control"/>
+
+        <clwater.beziercurve.BezierCurveView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/bezier"/>
+
+    </RelativeLayout>
+
+
 
 </LinearLayout>

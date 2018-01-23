@@ -22,7 +22,7 @@ class BezierCurveView : View {
     data class Point(val x: Float , val y:Float)   //坐标点的数据类
 
     var per = 0F
-    val points : MutableList<Point> = ArrayList()
+    var points : MutableList<Point> = ArrayList()
     val bezierPoints : MutableList<Point> = ArrayList()
     var drawControl = true
 
@@ -72,25 +72,25 @@ class BezierCurveView : View {
         initBaseTools()
 
 
-        points.clear()
-
-        points.add(Point(100F , 100F))
-        points.add(Point(300F , 300F))
-        points.add(Point(800F , 100F))
-        points.add(Point(1000F , 1100F))
-        points.add(Point(100F , 1100F))
-
-        points.add(Point(100F , 600F))
-        points.add(Point(600F , 1300F))
-        points.add(Point(1100F , 1100F))
-        points.add(Point(800F , 400F))
-        points.add(Point(200F , 600F))
-
-        points.add(Point(200F , 300F))
-        points.add(Point(400F , 800F))
-        points.add(Point(100F , 1100F))
-        points.add(Point(330F , 1600F))
-        points.add(Point(873F , 223F))
+//        points.clear()
+//
+//        points.add(Point(100F , 100F))
+//        points.add(Point(300F , 300F))
+//        points.add(Point(800F , 100F))
+//        points.add(Point(1000F , 1100F))
+//        points.add(Point(100F , 1100F))
+//
+//        points.add(Point(100F , 600F))
+//        points.add(Point(600F , 1300F))
+//        points.add(Point(1100F , 1100F))
+//        points.add(Point(800F , 400F))
+//        points.add(Point(200F , 600F))
+//
+//        points.add(Point(200F , 300F))
+//        points.add(Point(400F , 800F))
+//        points.add(Point(100F , 1100F))
+//        points.add(Point(330F , 1600F))
+//        points.add(Point(1020F , 1223F))
 
 
 
