@@ -15,44 +15,61 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <Button
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:text="start"
-                style="@style/Widget.AppCompat.Button.Colored"
-                android:id="@+id/start"/>
-            <Button
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:text="clear"
-                style="@style/Widget.AppCompat.Button.Colored"
-                android:id="@+id/clear"/>
-            <Button
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:text="clear Bezier"
-                style="@style/Widget.AppCompat.Button.Colored"
-                android:id="@+id/clearBezier"/>
+            android:orientation="vertical">
 
-            <Button
-                android:layout_width="0dp"
-                android:layout_weight="1"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Close Helper"
-                style="@style/Widget.AppCompat.Button.Colored"
-                android:id="@+id/chooseHelper"/>
+                android:orientation="horizontal">
 
-            <Button
-                android:layout_width="0dp"
-                android:layout_weight="1"
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:text="start"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:id="@+id/start"/>
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:text="clear"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:id="@+id/clear"/>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="More Points"
-                style="@style/Widget.AppCompat.Button.Colored"
-                android:id="@+id/more"/>
+                android:orientation="horizontal">
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:text="Change Point"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:id="@+id/clearBezier"/>
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:text="Close Auxiliary"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:id="@+id/chooseAuxiliary"/>
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:text="More Points"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:id="@+id/more"/>
+
+            </LinearLayout>
+
 
         </LinearLayout>
 
@@ -156,6 +173,7 @@
         <clwater.beziercurve.BezierCurveView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:visibility="gone"
             android:id="@+id/bezier"/>
 
     </RelativeLayout>
