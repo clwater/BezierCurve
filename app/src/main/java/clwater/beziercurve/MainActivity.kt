@@ -14,7 +14,12 @@ class MainActivity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        bezier.visibility = View.GONE
+
+        initView()
+    }
+
+    private fun initView() {
+        //开始绘制按钮
         start.setOnClickListener {
             if (control.controlIndex >= control.maxPoint || bezier.isMore == true) {
                 bezier.points = control.points
@@ -22,33 +27,36 @@ class MainActivity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener {
                 bezier.inRunning = true
                 bezier.viewTime = time* 1000F
                 bezier.changeView()
+                control.inChangePoint = false
             }
         }
 
-
+        //清除按钮
         clear.setOnClickListener{
             bezier.visibility = View.GONE
             bezier.inRunning = false
             control.clear()
         }
 
+        //关闭曲线绘制图层
         clearBezier.setOnClickListener{
             bezier.visibility = View.GONE
             bezier.inRunning = false
-
+            control.inChangePoint = true
         }
 
-
-        chooseHelper.setOnClickListener{
+        //开启/关闭辅助线
+        chooseAuxiliary.setOnClickListener{
             if (bezier.drawControl){
                 bezier.drawControl = false
-                chooseHelper.text = "Open Helper"
+                chooseAuxiliary.text = "Open Auxiliary"
             }else{
                 bezier.drawControl = true
-                chooseHelper.text = "Close Helper"
+                chooseAuxiliary.text = "Close Auxiliary"
             }
         }
 
+        //设置seekbar监听及相关文本设置
         max_controrl.text = "index: ${index}"
         seekbar_index.progress = index
         seekbar_index.setOnSeekBarChangeListener(this)
@@ -57,7 +65,7 @@ class MainActivity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener {
         seekbar_time.progress = time * 1000
         seekbar_time.setOnSeekBarChangeListener(this)
 
-
+        //是否开启无限制控制点绘制
         more.setOnClickListener{
             if (control.isMore == true){
                 control.isMore = false
@@ -77,11 +85,7 @@ class MainActivity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener {
         }
     }
 
-    fun updateSeek(){
-        max_controrl.text = "index: ${index}"
-    }
-
-
+    //seekbar拖动监听
     override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
 
         if (seekBar?.id == R.id.seekbar_index) {
@@ -89,7 +93,7 @@ class MainActivity : AppCompatActivity(), SeekBar.OnSeekBarChangeListener {
             if (progress < 2) {
                 index = 2
             }
-            updateSeek()
+            max_controrl.text = "index: ${index}"
         }else if (seekBar?.id == R.id.seekbar_time){
             time = progress / 1000
             if (time < 1){

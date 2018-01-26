@@ -7,7 +7,6 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Path
 import android.util.AttributeSet
-import android.util.Log
 import android.view.View
 import android.view.animation.LinearInterpolator
 
@@ -19,31 +18,32 @@ class BezierCurveView : View {
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
 
-    data class Point(val x: Float , val y:Float)   //坐标点的数据类
+    data class Point(var x: Float, var y:Float)   //坐标点的数据类
 
     var per = 0F
     var points : MutableList<Point> = ArrayList()
     val bezierPoints : MutableList<Point> = ArrayList()
-    var viewTime = 1000F
+    var viewTime = 1000F    //动画时间
 
     val linePaint = Paint()
     val textPaint = Paint()
     val path = Path()
-    var inRunning = true
-    var isMore = false
-    var drawControl = true
+
+    var inRunning = true    //是否在绘制图像
+    var isMore = false      //是否是无限制控制点模式
+    var drawControl = true  //是否绘制辅助线
 
 
 
     var level = 0
-
+    //点层级字符集
     val charSequence = listOf(
             "P",
             "A" ,"B" ,"C" ,"D" ,"E"
             ,"F" ,"G" ,"H" ,"I" ,"J"
             ,"K" ,"L" ,"M" ,"N"
     )
-
+    //辅助线颜色集
     val colorSequence = listOf(
             0x7F000000,
             0xff1BFFF8,
@@ -73,19 +73,14 @@ class BezierCurveView : View {
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-
+        //初始化相关工具类
         initBaseTools()
 
-
-        if (inRunning) {
-
-            if (points.size > 0) {
-                drawBezier(canvas, per, points)
-                level = 0
-            }
+        if (inRunning && points.size > 0) {
+            //绘制贝塞尔曲线
+            drawBezier(canvas, per, points)
+            level = 0
         }
-
-
     }
 
 
@@ -102,19 +97,20 @@ class BezierCurveView : View {
 
     }
 
+    //通过递归方法绘制贝塞尔曲线
     private fun  drawBezier(canvas: Canvas, per: Float, points: MutableList<Point>) {
+
         val inBase: Boolean
-        if (level == 0){
+
+        //判断当前层级是否需要绘制线段
+        if (level == 0 || drawControl){
             inBase = true
         }else{
-            if (drawControl == true){
-                inBase = true
-            }else{
-                inBase = false
-            }
+            inBase = false
         }
 
 
+        //根据当前层级和是否为无限制模式选择线段及文字的颜色
         if (isMore){
             linePaint.color = 0x3F000000
             textPaint.color = 0x3F000000
@@ -123,10 +119,13 @@ class BezierCurveView : View {
             textPaint.color = colorSequence[level].toInt()
         }
 
+        //移动到开始的位置
         path.moveTo(points[0].x , points[0].y)
 
-
-
+        //如果当前只有一个点
+        //根据贝塞尔曲线定义可以得知此点在贝塞尔曲线上
+        //将此点添加到贝塞尔曲线点集中(页面重新绘制后之前绘制的数据会丢失 需要重新回去前段的曲线路径)
+        //将当前点绘制到页面中
         if (points.size == 1){
             bezierPoints.add(Point(points[0].x , points[0].y))
             drawBezierPoint(bezierPoints , canvas)
@@ -140,7 +139,8 @@ class BezierCurveView : View {
 
         val nextPoints: MutableList<Point> = ArrayList()
 
-
+        //更新路径信息
+        //计算下一级控制点的坐标
         for (index in 1..points.size - 1){
             path.lineTo(points[index].x , points[index].y)
 
@@ -150,7 +150,7 @@ class BezierCurveView : View {
             nextPoints.add(Point(nextPointX , nextPointY))
         }
 
-
+        //绘制控制点的文本信息
         if (!(level !=0 && (per==0F || per == 1F) )) {
             if (inBase) {
                 if (isMore && level != 0){
@@ -168,7 +168,7 @@ class BezierCurveView : View {
             }
         }
 
-
+        //绘制当前层级
         if (!(level !=0 && (per==0F || per == 1F) )) {
             if (inBase) {
                 canvas.drawPath(path, linePaint)
@@ -176,12 +176,15 @@ class BezierCurveView : View {
         }
         path.reset()
 
+        //更新层级信息
         level++
 
+        //绘制下一层
         drawBezier(canvas, per, nextPoints)
 
     }
 
+    //绘制前段贝塞尔曲线部分
     private fun  drawBezierPoint(bezierPoints: MutableList<Point> , canvas: Canvas) {
         val paintBse = Paint()
         paintBse.color = Color.RED
